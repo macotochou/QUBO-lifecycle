@@ -21,12 +21,12 @@ from dwave.system import DWaveSampler, EmbeddingComposite
 # Create Q matrix
 Q = defaultdict(int)
 
-Q[(1,1)] = -91
-Q[(1,2)] = 72
-Q[(1,3)] = 72
-Q[(2,2)] = -87
-Q[(2,3)] = 72
-Q[(3,3)] = -89
+Q[(1,1)] = -62
+Q[(1,2)] = 48
+Q[(1,3)] = 48
+Q[(2,2)] = -57
+Q[(2,3)] = 48
+Q[(3,3)] = -59
 
 print("\nQUBO:\n")
 for i in range(1,4):
@@ -72,7 +72,7 @@ embedding = {1:[1], 2:[2], 3:[3,4]}
 # Map our Ising model onto the embedding
 qubits = list(i for x in embedding.values() for i in x)
 target = nx.cycle_graph(qubits)
-th, tJ_disordered = dwave.embedding.embed_ising(ising_model[0], ising_model[1], embedding, target, chain_strength=24) # Generate the basic embedding 
+th, tJ_disordered = dwave.embedding.embed_ising(ising_model[0], ising_model[1], embedding, target) # Generate the basic embedding 
 # Original embedding's tJ_disordered has some disordered terms (e.g. (2,1) instead of (1,2))
 # Create an ordered version of tJ_disordered to fit the quiz question format
 tJ={ (key if key[0]<key[1] else (key[1],key[0])):(tJ_disordered[key]) for key in tJ_disordered.keys() } 
